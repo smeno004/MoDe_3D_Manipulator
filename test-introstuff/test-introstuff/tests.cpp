@@ -50,12 +50,25 @@ int main()
 
 	//double vidFPS = vidCap.get(CV_CAP_PROP_FPS);
 
+	//cout << vidFPS << endl;
+
 	//cout << "Frames Per Second: (" << vidFPS << " fps)" << endl;
 
 	double vidWidth = vidCap.get(CV_CAP_PROP_FRAME_WIDTH);
 	double vidHeight = vidCap.get(CV_CAP_PROP_FRAME_HEIGHT);
 
 	cout << "Frame Size: " << vidWidth << " x " << vidHeight << endl;
+
+	Size frameSize(static_cast<int>(vidWidth), static_cast<int>(vidHeight));
+
+	VideoWriter videoFile("d:\\test.avi", CV_FOURCC('M', 'J', 'P', 'G'), 10, frameSize, true);
+
+	if (!videoFile.isOpened())
+	{
+		cout << "Failed to write to file." << endl;
+		system("pause"); //wait for a key press
+		return -1;
+	}
 
 	namedWindow("Video Playback", CV_WINDOW_NORMAL);
 
@@ -70,6 +83,8 @@ int main()
 			cout << "Could not load frame." << endl;
 			break;
 		}
+
+		videoFile.write(vidFrame);
 
 		imshow("Video Playback", vidFrame);
 
