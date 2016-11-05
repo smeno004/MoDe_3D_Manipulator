@@ -19,7 +19,8 @@ using namespace cv;
 
 int main()
 {
-	Mat img(1000, 1000, CV_8UC3, Scalar(100, 25, 50));
+	//Code for creating an empty image window
+	/*Mat img(1000, 1000, CV_8UC3, Scalar(100, 25, 50));
 
 	if (img.empty())
 	{
@@ -33,7 +34,51 @@ int main()
 
 	waitKey(0);
 
-	destroyWindow("Image Read");
+	destroyWindow("Image Read");*/
+
+	//Code for video capture
+	VideoCapture vidCap(0);
+
+	if (!vidCap.isOpened())
+	{
+		cout << "Cannot open camera feed." << endl;
+		system("pause"); //wait for a key press
+		return -1;
+	}
+
+	//vidCap.set(CV_CAP_PROP_POS_MSEC, 100); //Starts 100 ms in
+
+	//double vidFPS = vidCap.get(CV_CAP_PROP_FPS);
+
+	//cout << "Frames Per Second: (" << vidFPS << " fps)" << endl;
+
+	double vidWidth = vidCap.get(CV_CAP_PROP_FRAME_WIDTH);
+	double vidHeight = vidCap.get(CV_CAP_PROP_FRAME_HEIGHT);
+
+	cout << "Frame Size: " << vidWidth << " x " << vidHeight << endl;
+
+	namedWindow("Video Playback", CV_WINDOW_NORMAL);
+
+	while (1)
+	{
+		Mat vidFrame;
+
+		bool frameSuccess = vidCap.read(vidFrame);
+
+		if (!frameSuccess)
+		{
+			cout << "Could not load frame." << endl;
+			break;
+		}
+
+		imshow("Video Playback", vidFrame);
+
+		if (waitKey(30) == 27)
+		{
+			cout << "User pressed esc, exiting..." << endl;
+			break;
+		}
+	}
 
 	return 0;
 }
