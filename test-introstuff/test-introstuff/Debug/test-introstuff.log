@@ -1,3 +1,1 @@
-﻿  tests.cpp
-  test-introstuff.vcxproj -> D:\SidSpace\MoDe 3D Manipulator\MoDe_3D_Manipulator\test-introstuff\Debug\test-introstuff.exe
-  test-introstuff.vcxproj -> D:\SidSpace\MoDe 3D Manipulator\MoDe_3D_Manipulator\test-introstuff\Debug\test-introstuff.pdb (Full PDB)
+﻿opencv_highgui2413d.lib(opencv_highgui2413d.dll) : fatal error LNK1112: module machine type 'x64' conflicts with target machine type 'X86'
